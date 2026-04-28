@@ -1,4 +1,4 @@
-    //Fecha:  sábado 30 Agosto 2025
+//Fecha:  sábado 30 Agosto 2025 
 //Autor: Ana Roncal 
 
 #ifndef LISTASIMPLEMENTEENLAZADA_LISTA_H

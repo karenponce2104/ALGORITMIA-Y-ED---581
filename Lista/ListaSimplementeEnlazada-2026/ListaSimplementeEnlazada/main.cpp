@@ -30,9 +30,13 @@ NodoLista* recorre(NodoLista* prec) {
 }
 
 void invierterec(Lista &plista) {
-    recorre(plista.inicio);
+    NodoLista *pini= recorre(plista.inicio);
+    plista.inicio->siguiente=nullptr;
+    plista.inicio=pini;
 
 }
+
+
 int main(int argc, char **argv) {
 
     ElementoLista elemento{};
@@ -47,6 +51,9 @@ int main(int argc, char **argv) {
     imprimir(listaEnOrden);
     invierte(listaEnOrden);
     imprimir(listaEnOrden);
+
+
+
 
 
     return 0;
