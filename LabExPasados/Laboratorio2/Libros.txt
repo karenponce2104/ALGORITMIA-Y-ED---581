@@ -1,0 +1,8 @@
+L001-Cien Anios de Soledad-200-400
+L002-1984-600-5000
+L003-El Principito-120-7500
+L004-Harry Potter-1200-12000
+L005-Sapiens-350-1000
+L006-Don Quijote-400-780
+L007-Fahrenheit 451-250-4500
+L008-Orgullo y Prejuicio-678-23000
