@@ -1,0 +1,52 @@
+#include <iostream>
+#define M 26  //M maximo es N
+using namespace std;
+
+struct strsol{
+    int freq[M];
+    char polo;
+    int frecuencia;
+};
+strsol fusiona(strsol izq,strsol der) {
+    strsol resul;
+    for(int i=0;i<M;i++)
+        resul.freq[i]=izq.freq[i]+der.freq[i];
+    resul.frecuencia=0;
+    for(int i=0;i<M;i++)
+        if(resul.freq[i]>resul.frecuencia){
+            resul.frecuencia=resul.freq[i];
+            resul.polo='A'+i;
+        }
+    return resul;
+}
+
+strsol mergespolos(char *arr,int ini,int fin){
+    strsol resul{};
+    if(ini==fin){
+        resul.freq[arr[ini]-'A']=1;
+        resul.polo=arr[ini];
+        resul.frecuencia=1;
+        return resul;
+    }
+    int med=(ini+fin)/2;
+    strsol izq=mergespolos(arr,ini,med);
+    strsol der=mergespolos(arr,med+1,fin);
+    return fusiona(izq,der);
+}
+
+int main(){
+    //char almacen[]={'C','B','A','F'};
+    //char almacen[]={'A','F','B','F','F','C','C','F'};
+    char almacen[]={'A','B','B','B','A','C','C','C','A','D','D','D','A','E','E','E'};
+    //char almacen[]={'A','C','A'};
+    //char almacen[]={'A','B','A','B','C'};
+    //char almacen[]={'C','B','A','B','B'};
+    int n=sizeof(almacen)/sizeof(almacen[0]);
+
+    strsol sol=mergespolos(almacen,0,n-1);
+
+    cout<<"Grupo: "<<sol.polo<<endl;
+    cout<<"Frecuencia: "<<sol.frecuencia<<endl;
+
+    return 0;
+}
