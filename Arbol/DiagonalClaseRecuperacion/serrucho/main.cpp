@@ -26,18 +26,18 @@ void recorridodiafonal(ArbolBinarioBusqueda arbol) {
     if (esArbolVacio(arbol)) return;
     construir(cola);
     NodoArbolBinarioBusqueda *parbol =arbol.raiz;
-    while (parbol!= nullptr) {//el 1 trabaja directo con el bit, por eso compila más rapdio
-        cout<<parbol->elemento.numero<<" "; //apilar
+    while (parbol!= nullptr) {
+        cout<<parbol->elemento.numero<<" "; 
         if (parbol->izquierda!=nullptr) {
-            encolar(cola, {parbol->izquierda->elemento.numero});// encolamos el elemento punto puntero *. = ->
+            encolar(cola, {parbol->izquierda->elemento.numero});
         }
         if (parbol->derecha!=nullptr) {
-            parbol = parbol->derecha; //si no tiene derecha, desencolamos lo que tenga en la izquierda
+            parbol = parbol->derecha;
         }
         else {
             if (!esColaVacia(cola)){
                 ElementoCola aux;
-                aux = desencolar(cola); //lo buscas para verificar si tiene hijos en la derecha,
+                aux = desencolar(cola);
                 parbol = buscar(arbol.raiz, aux.numero);
             }
             else {
@@ -60,7 +60,7 @@ int main() {
     insertar(arbol, {175});
     insertar(arbol, {40});
     insertar(arbol, {200});
-    recorrerPreOrden(arbol); //la raiz debe ser la mas arriba
+    recorrerPreOrden(arbol);
     cout<<endl;
     recorridodiafonal(arbol);
     return 0;
