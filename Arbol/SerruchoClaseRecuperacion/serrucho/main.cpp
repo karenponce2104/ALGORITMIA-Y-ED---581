@@ -1,0 +1,67 @@
+#include "Biblioteca/ElementoArbolBinarioBusqueda.h"
+#include "Biblioteca/funcionesArbolBinarioBusqueda.h"
+#include "Biblioteca/NodoArbolBinarioBusqueda.h"
+#include <iostream>
+#include "Biblioteca/ArbolBinarioBusqueda.h"
+#include "BibliotecaCola/Cola.h"
+#include "BibliotecaCola/funcionesCola.h"
+#include "BibliotecaCola/NodoCola.h"
+
+using namespace std;
+
+
+NodoArbolBinarioBusqueda *buscar(NodoArbolBinarioBusqueda *raiz, int dato) {
+    if (raiz==nullptr) return nullptr;
+    while (raiz!=nullptr) {
+        if (raiz->elemento.numero == dato) return raiz;
+        if (raiz->elemento.numero > dato)
+            raiz= raiz->izquierda;
+        else
+            raiz= raiz->derecha;
+    }
+    return nullptr;
+}
+void recorridodiafonal(ArbolBinarioBusqueda arbol) {
+    Cola cola;
+    if (esArbolVacio(arbol)) return;
+    construir(cola);
+    NodoArbolBinarioBusqueda *parbol =arbol.raiz;
+    while (parbol!= nullptr) {//el 1 trabaja directo con el bit, por eso compila más rapdio
+        cout<<parbol->elemento.numero<<" "; //apilar
+        if (parbol->izquierda!=nullptr) {
+            encolar(cola, {parbol->izquierda->elemento.numero});// encolamos el elemento punto puntero *. = ->
+        }
+        if (parbol->derecha!=nullptr) {
+            parbol = parbol->derecha; //si no tiene derecha, desencolamos lo que tenga en la izquierda
+        }
+        else {
+            if (!esColaVacia(cola)){
+                ElementoCola aux;
+                aux = desencolar(cola); //lo buscas para verificar si tiene hijos en la derecha,
+                parbol = buscar(arbol.raiz, aux.numero);
+            }
+            else {
+                parbol =nullptr;
+            }
+        }
+
+    }
+    //desapilas(?
+}
+
+int main() {
+    ArbolBinarioBusqueda arbol;
+    construir(arbol);
+    insertar(arbol, {100});
+    insertar(arbol, {150});
+    insertar(arbol, {50});
+    insertar(arbol, {75});
+    insertar(arbol, {125});
+    insertar(arbol, {175});
+    insertar(arbol, {40});
+    insertar(arbol, {200});
+    recorrerPreOrden(arbol); //la raiz debe ser la mas arriba
+    cout<<endl;
+    recorridodiafonal(arbol);
+    return 0;
+}
